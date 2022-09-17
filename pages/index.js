@@ -30,6 +30,7 @@ export default function Home() {
             <Product key={product.attributes.slug} product={product} />
           ))}
         </Gallary>
+        <div style={{ height: "2rem" }}></div>
       </main>
     </div>
   );
