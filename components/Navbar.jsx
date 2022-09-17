@@ -5,7 +5,6 @@ import { NavStyles, NavItems } from "../styles/NavStyles";
 import Cart from "./Cart";
 import User from "./User";
 const { AnimatePresence, motion } = require("framer-motion");
-import { useUser } from "@auth0/nextjs-auth0";
 
 export default function Navbar() {
   const { showCart, setShowCart, totalQtys } = useStateContext();
