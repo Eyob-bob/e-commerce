@@ -73,7 +73,7 @@ export default function Cart() {
                   <img src={item.image.data.attributes.formats.small.url} />
                   <CardInfo>
                     <h3>{item.title}</h3>
-                    <h3>${item.price}</h3>
+                    <h3>ETB {item.price}</h3>
                     <Quantity>
                       <span>Quantity</span>
                       <button onClick={() => onRemove(item)}>
@@ -92,7 +92,7 @@ export default function Cart() {
         <Checkout layout>
           {cartItems.length >= 1 && (
             <div>
-              <h3>Subtotal ${totalPrice}</h3>
+              <h3>Subtotal ETB {totalPrice}</h3>
               <button onClick={handleCheckout}>Purchase</button>
             </div>
           )}
