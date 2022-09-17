@@ -2,6 +2,7 @@ import styled from "styled-components";
 import purchase from "../public/purchase.jpg";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import Head from "next/head";
 const { motion } = require("framer-motion");
 // STRIPE_SECRET_KEY
 const stripe = require("stripe")(
@@ -22,40 +23,45 @@ export async function getServerSideProps(params) {
 export default function Success({ order }) {
   const route = useRouter();
   return (
-    <Wrapper>
-      <Card
-        animate={{ opacity: 1, scale: 1, transition: { duration: 0.75 } }}
-        initial={{ opacity: 0, scale: 0.75 }}
-      >
-        <h1>Thank you for your order!</h1>
-        <h2>A confirmation email has been sent to</h2>
-        <h2>{order.customer_details.email}</h2>
-        <InfoWrapper>
-          <Address>
-            <h3>Adress</h3>
-            {Object.entries(order.customer_details.address).map(
-              ([key, val]) => (
-                <p key={key}>
-                  {key} : {val}
-                </p>
-              )
-            )}
-          </Address>
-          <OrderInfo>
-            <h3>Products</h3>
-            {order.line_items.data.map((item) => (
-              <div key={item.id}>
-                <p>Product: {item.description}</p>
-                <p>Quantity: {item.quantity}</p>
-                <p>Price: {item.price.unit_amount}</p>
-              </div>
-            ))}
-          </OrderInfo>
-        </InfoWrapper>
-        <button onClick={() => route.push("/")}>Continue Shopping</button>
-        <Image src={purchase} alt="success" />
-      </Card>
-    </Wrapper>
+    <>
+      <Head>
+        <title>Success Page</title>
+      </Head>
+      <Wrapper>
+        <Card
+          animate={{ opacity: 1, scale: 1, transition: { duration: 0.75 } }}
+          initial={{ opacity: 0, scale: 0.75 }}
+        >
+          <h1>Thank you for your order!</h1>
+          <h2>A confirmation email has been sent to</h2>
+          <h2>{order.customer_details.email}</h2>
+          <InfoWrapper>
+            <Address>
+              <h3>Adress</h3>
+              {Object.entries(order.customer_details.address).map(
+                ([key, val]) => (
+                  <p key={key}>
+                    {key} : {val}
+                  </p>
+                )
+              )}
+            </Address>
+            <OrderInfo>
+              <h3>Products</h3>
+              {order.line_items.data.map((item) => (
+                <div key={item.id}>
+                  <p>Product: {item.description}</p>
+                  <p>Quantity: {item.quantity}</p>
+                  <p>Price: {item.price.unit_amount}</p>
+                </div>
+              ))}
+            </OrderInfo>
+          </InfoWrapper>
+          <button onClick={() => route.push("/")}>Continue Shopping</button>
+          <Image src={purchase} alt="success" />
+        </Card>
+      </Wrapper>
+    </>
   );
 }
 

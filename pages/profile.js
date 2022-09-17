@@ -6,6 +6,7 @@ const stripe = require("stripe")(
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import styled from "styled-components";
 import formatMoney from "../lib/formatMoney";
+import Head from "next/head";
 
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps(ctx) {
@@ -24,24 +25,31 @@ export default function Profile({ user, orders }) {
 
   return (
     user && (
-      <Wrapper>
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
-        <div>
-          {orders.map((order) => (
-            <Order key={order.id}>
-              <div>
-                <h1>Order Number: {order.id}</h1>
-                <h2>{formatMoney(order.amount)}</h2>
-              </div>
-              <div>
-                <h1>Receipt Email: {user.email}</h1>
-              </div>
-            </Order>
-          ))}
-        </div>
-        <Button onClick={() => route.push("/api/auth/logout")}>Log out</Button>
-      </Wrapper>
+      <>
+        <Head>
+          <title>Profile Page</title>
+        </Head>
+        <Wrapper>
+          <h2>{user.name}</h2>
+          <p>{user.email}</p>
+          <div>
+            {orders.map((order) => (
+              <Order key={order.id}>
+                <div>
+                  <h1>Order Number: {order.id}</h1>
+                  <h2>{formatMoney(order.amount)}</h2>
+                </div>
+                <div>
+                  <h1>Receipt Email: {user.email}</h1>
+                </div>
+              </Order>
+            ))}
+          </div>
+          <Button onClick={() => route.push("/api/auth/logout")}>
+            Log out
+          </Button>
+        </Wrapper>
+      </>
     )
   );
 }

@@ -11,7 +11,7 @@ export default function Navbar() {
 
   return (
     <NavStyles>
-      <Link href="/">Styled.</Link>
+      <Link href="/">E-COMMERCE.</Link>
       <NavItems>
         <User />
         <div onClick={() => setShowCart(true)}>
