@@ -5,12 +5,13 @@ import { NavStyles, NavItems } from "../styles/NavStyles";
 import Cart from "./Cart";
 
 export default function Navbar() {
-  const { showCart, setShowCart } = useStateContext();
+  const { showCart, setShowCart, totalQtys } = useStateContext();
   return (
     <NavStyles>
       <Link href="/">Styled.</Link>
       <NavItems>
         <div onClick={() => setShowCart(true)}>
+          {totalQtys > 0 && <span>{totalQtys}</span>}
           <FiShoppingBag />
           <h3>Cart</h3>
         </div>
