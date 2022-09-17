@@ -9,9 +9,11 @@ import {
 } from "../../styles/DetailsStyle";
 
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
+import { useStateContext } from "../../lib/context";
 
 const ProductDetails = () => {
   const router = useRouter();
+  const { qty, increase, decrease, onAdd } = useStateContext();
 
   const slug = router.query.slug;
 
@@ -36,15 +38,17 @@ const ProductDetails = () => {
 
         <Quantity>
           <span>Quantity</span>
-          <button>
+          <button onClick={decrease}>
             <AiFillMinusCircle />
           </button>
-          <p>0</p>
-          <button>
+          <p>{qty}</p>
+          <button onClick={increase}>
             <AiFillPlusCircle />
           </button>
         </Quantity>
-        <Buy>Add to cart</Buy>
+        <Buy onClick={() => onAdd(data.products.data[0].attributes, qty)}>
+          Add to cart
+        </Buy>
       </ProductInfo>
     </DetailsStyle>
   );
