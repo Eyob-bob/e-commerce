@@ -15,7 +15,7 @@ export const CartWrapper = styled(motion.div)`
 `;
 
 export const CartStyle = styled(motion.div)`
-  width: 50%;
+  width: 40%;
   background: #f1f1f1;
   padding: 2rem 5rem;
   overflow-y: scroll;
@@ -72,3 +72,5 @@ export const Checkout = styled(motion.div)`
     cursor: pointer;
   }
 `;
+
+export const Cards = styled(motion.div)``;
